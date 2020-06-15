@@ -1,7 +1,10 @@
-﻿using Tags;
+﻿using Container;
+using Data;
+using Tags;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
+using UnityEngine;
 
 namespace Systems
 {
@@ -15,9 +18,10 @@ namespace Systems
             
             Entities.WithAll<DeleteTag>().ForEach((Entity entity) =>
             {
+                DataContainer.Instance.Score.Value += 1;
                 // ReSharper disable once AccessToDisposedClosure
                 entityCommandBuffer.DestroyEntity(entity);
-            }).Run();
+            }).WithoutBurst().Run();
             
             entityCommandBuffer.Playback(EntityManager);
             entityCommandBuffer.Dispose();

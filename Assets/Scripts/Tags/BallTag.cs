@@ -6,5 +6,6 @@ namespace Tags
     public struct BallTag : IComponentData
     {
         //Empty
+        public int Id;
     }
 }

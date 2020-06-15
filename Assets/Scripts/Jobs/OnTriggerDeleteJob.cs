@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Components;
+using Interfaces;
 using Tags;
 using Unity.Collections;
 using Unity.Entities;
@@ -21,11 +22,9 @@ namespace Jobs
 
         public void OnTriggerEvent(Entity current, Entity other)
         {
-            if (BallEntities.HasComponent(current))
-            {
-                if (EntitiesToDelete.HasComponent(other)) return;
-                CommandBuffer.AddComponent<DeleteTag>(other);
-            }
+            if (!BallEntities.HasComponent(current)) return;
+            if (EntitiesToDelete.HasComponent(other)) return;
+            CommandBuffer.AddComponent(other, new DeleteTag());
         }
     }
 }

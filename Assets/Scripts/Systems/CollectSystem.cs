@@ -1,4 +1,5 @@
-﻿using Jobs;
+﻿using Components;
+using Jobs;
 using Tags;
 using Unity.Entities;
 using Unity.Jobs;
@@ -22,7 +23,7 @@ namespace Systems
 
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            var onTriggerDeleteJob = new OnTriggerDeleteJob()
+            var onTriggerDeleteJob = new OnTriggerDeleteJob
             {
                 BallEntities = GetComponentDataFromEntity<BallTag>(),
                 EntitiesToDelete = GetComponentDataFromEntity<DeleteTag>(),
